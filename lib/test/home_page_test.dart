@@ -16,16 +16,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
-  Widget build(BuildContext context) {return
-    Scaffold(
-      body: CollapsingList(),
-      bottomNavigationBar: BottomAppBar(),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amber,
-        onPressed: () async {
-          FlutterPhoneDirectCaller.callNumber('0048602204473');},
-        tooltip: 'Make a call',
-        child: const Icon(Icons.call),));}
+  Widget build(BuildContext context) {return Scaffold(
+    body: CollapsingList(),
+    bottomNavigationBar: BottomAppBar(),
+    floatingActionButton: FloatingActionButton(
+    onPressed: () async {
+    FlutterPhoneDirectCaller.callNumber('0048602204473');},
+    tooltip: 'Make a call',
+    child: const Icon(Icons.call),));}
 
 }
 
@@ -65,9 +63,8 @@ class CollapsingList extends StatelessWidget {
         minHeight: 60.0,
         maxHeight: 200.0,
         child: Container(
-            color: Colors.lightBlue.shade50, child: Center(
-            child:
-            Text(headerText))),
+            color: Colors.lightBlue, child: Center(child:
+        Text(headerText))),
       ),
     );
   }
@@ -82,12 +79,12 @@ class CollapsingList extends StatelessWidget {
           expandedHeight: 160.0,
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: true,
-            title: Text('CV: Izabela Wróblewska', style: TextStyle(fontStyle: FontStyle.italic, color: Colors.white)),
+            title: Text('CV \nIzabela Wróblewska', style: TextStyle(fontStyle: FontStyle.italic, color: Colors.white)),
             background: Stack(
                 fit: StackFit.expand,
                 children: <Widget>[Image.network(
-                  'https://res.cloudinary.com/dtkqibgph/image/upload/v1652638527/mojeCV/avatar-0160db36d581975ec9227e08727d46fb_vmmjmi.jpg',
-                  fit: BoxFit.contain,
+                  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                  fit: BoxFit.cover,
                 ),
                   const DecoratedBox(
                     decoration: BoxDecoration(
@@ -104,7 +101,7 @@ class CollapsingList extends StatelessWidget {
                 ]),
           ),
         ),
-        makeHeader('Umiejętności'),
+        makeHeader('Header Section 1'),
         SliverGrid.count(
           crossAxisCount: 3,
           children: [
@@ -119,7 +116,7 @@ class CollapsingList extends StatelessWidget {
             Container(color: Colors.blue, height: 150.0),
           ],
         ),
-        makeHeader('Doświadczenie'),
+        makeHeader('Header Section 2'),
         SliverFixedExtentList(
           itemExtent: 150.0,
           delegate: SliverChildListDelegate(
@@ -132,7 +129,7 @@ class CollapsingList extends StatelessWidget {
             ],
           ),
         ),
-        makeHeader('Edukacja'),
+        makeHeader('Header Section 3'),
         SliverGrid(
           gridDelegate:
           new SliverGridDelegateWithMaxCrossAxisExtent(
@@ -152,7 +149,7 @@ class CollapsingList extends StatelessWidget {
             childCount: 20,
           ),
         ),
-        makeHeader('Zainteresowania'),
+        makeHeader('Header Section 4'),
         // Yes, this could also be a SliverFixedExtentList. Writing
         // this way just for an example of SliverList construction.
         SliverList(
