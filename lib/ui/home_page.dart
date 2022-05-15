@@ -1,57 +1,77 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Image.asset('Baby_Face.jpg'),
-        title: Text(widget.title),
-      ),
-      body: ListView(
-        children: [
-          ListTile(
-            leading: Text('Moje doświadczenie'),
-            title: Text('mam duże doświadczenie'),
-            subtitle: Text('w myciu kibla i garów :D :D :D '),
-          ),
-          ListTile(
-            leading: Text('Moja edukacja'),
-            title: Text('uczę się całe życie'),
-            subtitle: Text('uczę się na błędach')
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            pinned: true,
+            snap: false,
+            floating: false,
+            expandedHeight: 160.0,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Text('CV \n \nIzabela Wróblewska'),
+              background: Stack(
+                fit: StackFit.expand,
+              children: <Widget>[Image.network(
+                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                fit: BoxFit.cover,
+              ),
+                const DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment(0.0, 0.5),
+                      end: Alignment.center,
+                      colors: <Color>[
+                        Color(0x60000000),
+                        Color(0x00000000),
+                      ],
+                    ),
+                  ),
+                ),
+              ]),
             ),
-          SizedBox(
-            height: 150,
-            width: 150,
-            child:Image.asset('Baby_Face.jpg',fit: BoxFit.fitHeight,) ,
-          )
+          ),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 20,
+              child: Center(
+                child: Text('Scroll to see the SliverAppBar in effect.'),
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                return Container(
+                  color: index.isOdd ? Colors.white : Colors.black12,
+                  height: 100.0,
+                  child: Center(
+                    child: Text('$index', textScaleFactor: 5),
+                  ),
+                );
+              },
+              childCount: 20,
+            ),
+          ),
         ],
-        
       ),
       bottomNavigationBar: BottomAppBar(),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        onPressed: () async {
+      FlutterPhoneDirectCaller.callNumber('0048602204473');},
+        tooltip: 'Make a call',
+        child: const Icon(Icons.call),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
